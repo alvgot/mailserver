@@ -1,0 +1,8 @@
+groups:
+- name: mailserver
+  rules:
+  - alert: HighLoad
+    expr: node_load15 > 2
+    for: 5m
+    labels:
+      severity: warning

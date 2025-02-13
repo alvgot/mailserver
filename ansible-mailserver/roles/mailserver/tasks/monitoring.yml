@@ -1,16 +1,14 @@
 ---
-- name: Install Prometheus
+- name: Install monitoring stack
   apt:
-    name: prometheus
+    name: ["prometheus", "grafana", "prometheus-node-exporter"]
     state: present
 
-- name: Configure Prometheus
+- name: Deploy monitoring configurations
   template:
-    src: prometheus/prometheus.yml.j2
-    dest: /etc/prometheus/prometheus.yml
-  notify: restart prometheus
-
-- name: Install Node Exporter
-  apt:
-    name: prometheus-node-exporter
-    state: present
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { src: 'prometheus/prometheus.yml.j2', dest: '/etc/prometheus/prometheus.yml' }
+    - { src: 'grafana/datasources.yml.j2', dest: '/etc/grafana/provisioning/datasources/prometheus.yml' }
+  notify: restart monitoring services

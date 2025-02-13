@@ -1,0 +1,8 @@
+
+- name: restart monitoring services
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - prometheus
+    - grafana
