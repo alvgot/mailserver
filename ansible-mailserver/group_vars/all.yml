@@ -3,3 +3,11 @@ domain: example.com
 email: admin@example.com
 container_ip: 10.0.0.2
 gandi_api_key: your_api_key_here
+
+# Security Enhancements
+redis_password: "{{ 20 | random_password }}"
+auto_updates: true
+log_retention_days: 30
+
+# Monitoring Configuration
+prometheus_scrape_interval: 60s

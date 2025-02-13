@@ -4,11 +4,24 @@
     name: ["prometheus", "grafana", "prometheus-node-exporter"]
     state: present
 
-- name: Deploy monitoring configurations
+- name: Deploy Prometheus config
   template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    src: prometheus/prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+  notify: restart prometheus
+
+- name: Deploy Grafana config
+  template:
+    src: grafana/datasources.yml.j2
+    dest: /etc/grafana/provisioning/datasources/prometheus.yml
+  notify: restart grafana
+
+- name: Enable monitoring services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
   loop:
-    - { src: 'prometheus/prometheus.yml.j2', dest: '/etc/prometheus/prometheus.yml' }
-    - { src: 'grafana/datasources.yml.j2', dest: '/etc/grafana/provisioning/datasources/prometheus.yml' }
-  notify: restart monitoring services
+    - prometheus
+    - grafana
+    - prometheus-node-exporter

@@ -6,3 +6,8 @@ groups:
     for: 5m
     labels:
       severity: warning
+  - alert: ServiceDown
+    expr: up{job="mailserver"} == 0
+    for: 1m
+    labels:
+      severity: critical

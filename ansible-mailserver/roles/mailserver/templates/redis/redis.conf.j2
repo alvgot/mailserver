@@ -1,0 +1,5 @@
+bind 127.0.0.1
+protected-mode yes
+requirepass {{ redis_password }}
+maxmemory 512mb
+maxmemory-policy allkeys-lru

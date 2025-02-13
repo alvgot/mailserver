@@ -1,3 +1,8 @@
-/etc p+i+u+g
-/bin p+i+u+g
-/usr/bin p+i+u+g
+@@define DBDIR /var/lib/aide
+@@define LOGDIR /var/log/aide
+
+# Basic system integrity checks
+/etc p+i+u+g+sha512
+/bin p+i+u+g+sha512
+/usr/bin p+i+u+g+sha512
+/var/mail p+i+u+g+sha512
