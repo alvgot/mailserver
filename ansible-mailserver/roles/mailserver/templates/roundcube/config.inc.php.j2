@@ -1,0 +1,8 @@
+<?php
+$config = array(
+    'db_dsnw' => 'pgsql://{{ roundcube_db_user }}:{{ roundcube_db_password }}@localhost/{{ roundcube_db_name }}',
+    'default_host' => 'ssl://localhost',
+    'smtp_server' => 'tls://localhost',
+    'product_name' => '{{ domain }} Webmail',
+    'plugins' => array('password'),
+);

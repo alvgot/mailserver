@@ -1,0 +1,9 @@
+%YAML 1.1
+---
+vars:
+  address-groups:
+    HOME_NET: "[{{ container_ip }}]"
+    EXTERNAL_NET: "any"
+default-rule-path: /var/lib/suricata/rules
+rule-files:
+  - suricata.rules

@@ -1,0 +1,6 @@
+# Dovecot core configuration
+protocols = imap
+ssl = required
+ssl_cert = </etc/ssl/certs/postfix.crt
+ssl_key = </etc/ssl/private/postfix.key
+auth_mechanisms = plain login

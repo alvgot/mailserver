@@ -1,0 +1,35 @@
+---
+- name: Install base packages
+  apt:
+    name: ["{{ item }}"]
+    state: present
+  loop:
+    - suricata
+    - rkhunter
+    - nftables
+    - spamassassin
+    - fail2ban
+    - aide
+    - postfix
+    - dovecot-core
+    - dovecot-imapd
+    - roundcube
+    - caddy
+    - opendkim
+    - redis-server
+    - unattended-upgrades
+
+- include_tasks: firewall.yml
+- include_tasks: postfix.yml
+- include_tasks: dovecot.yml
+- include_tasks: opendkim.yml
+- include_tasks: suricata.yml
+- include_tasks: spamassassin.yml
+- include_tasks: fail2ban.yml
+- include_tasks: aide.yml
+- include_tasks: roundcube.yml
+- include_tasks: caddy.yml
+- include_tasks: rkhunter.yml
+- include_tasks: users.yml
+- include_tasks: monitoring.yml
+- include_tasks: backup.yml

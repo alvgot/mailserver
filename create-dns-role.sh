@@ -1,3 +1,13 @@
+#!/bin/bash
+set -e
+
+BASE_DIR="ansible-mailserver"
+
+# Create DNS config role structure
+mkdir -p ${BASE_DIR}/roles/dns_config/tasks
+
+# roles/dns_config/tasks/main.yml
+cat > ${BASE_DIR}/roles/dns_config/tasks/main.yml <<EOF
 ---
 - name: Create A record
   uri:
@@ -49,3 +59,9 @@
     body:
       rrset_values: ['"v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; rua=mailto:{{ email }}; ruf=mailto:{{ email }};"']
     body_format: json
+EOF
+
+# Update requirements.txt
+echo -e "ansible>=7.0\njmespath\npasslib" > ${BASE_DIR}/requirements.txt
+
+echo "DNS config role and requirements.txt created successfully"

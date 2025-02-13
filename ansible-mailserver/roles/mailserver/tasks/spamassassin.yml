@@ -1,0 +1,15 @@
+---
+- name: Update SpamAssassin rules
+  command: sa-update
+
+- name: Configure SpamAssassin
+  template:
+    src: spamassassin/local.cf.j2
+    dest: /etc/spamassassin/local.cf
+  notify: restart spamassassin
+
+- name: Enable SpamAssassin service
+  systemd:
+    name: spamassassin
+    enabled: yes
+    state: started

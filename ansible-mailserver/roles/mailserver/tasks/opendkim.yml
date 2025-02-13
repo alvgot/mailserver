@@ -1,0 +1,33 @@
+---
+- name: Install OpenDKIM
+  apt:
+    name: opendkim
+    state: present
+
+- name: Create DKIM directory structure
+  file:
+    path: "/etc/opendkim/keys/{{ domain }}"
+    state: directory
+    owner: opendkim
+    group: opendkim
+    mode: 0700
+
+- name: Generate DKIM key pair
+  command: >
+    opendkim-genkey -b 2048 -D /etc/opendkim/keys/{{ domain }}/
+    -d {{ domain }} -s mail -v
+  args:
+    creates: /etc/opendkim/keys/{{ domain }}/mail.private
+
+- name: Set DKIM key permissions
+  file:
+    path: "/etc/opendkim/keys/{{ domain }}/mail.private"
+    mode: 0600
+    owner: opendkim
+    group: opendkim
+
+- name: Configure OpenDKIM
+  template:
+    src: opendkim/opendkim.conf.j2
+    dest: /etc/opendkim.conf
+  notify: restart opendkim

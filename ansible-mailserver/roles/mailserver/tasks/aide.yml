@@ -1,0 +1,16 @@
+---
+- name: Configure AIDE
+  template:
+    src: aide/aide.conf.j2
+    dest: /etc/aide/aide.conf
+
+- name: Initialize AIDE database
+  command: aideinit -y
+
+- name: Schedule daily AIDE checks
+  cron:
+    name: "Daily AIDE check"
+    job: "/usr/bin/aide --check"
+    user: root
+    hour: 4
+    minute: 30

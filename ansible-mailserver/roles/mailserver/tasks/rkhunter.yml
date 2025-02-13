@@ -1,0 +1,16 @@
+---
+- name: Configure RKHunter
+  template:
+    src: rkhunter/rkhunter.conf.j2
+    dest: /etc/rkhunter.conf
+
+- name: Update RKHunter database
+  command: rkhunter --update
+
+- name: Schedule daily RKHunter scans
+  cron:
+    name: "Daily RKHunter scan"
+    job: "/usr/bin/rkhunter --cronjob --report-warnings-only"
+    user: root
+    hour: 3
+    minute: 0

@@ -1,0 +1,18 @@
+---
+- name: Configure Fail2Ban
+  template:
+    src: fail2ban/jail.local.j2
+    dest: /etc/fail2ban/jail.local
+  notify: restart fail2ban
+
+- name: Create Postfix filter
+  template:
+    src: fail2ban/filter-postfix.conf.j2
+    dest: /etc/fail2ban/filter.d/postfix.conf
+  notify: restart fail2ban
+
+- name: Enable Fail2Ban service
+  systemd:
+    name: fail2ban
+    enabled: yes
+    state: started

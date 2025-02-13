@@ -1,0 +1,12 @@
+---
+- name: Configure Caddy
+  template:
+    src: caddy/Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+  notify: reload caddy
+
+- name: Enable Caddy service
+  systemd:
+    name: caddy
+    enabled: yes
+    state: started

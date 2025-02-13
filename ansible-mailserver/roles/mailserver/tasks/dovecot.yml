@@ -1,0 +1,26 @@
+---
+- name: Configure Dovecot
+  template:
+    src: dovecot/dovecot.conf.j2
+    dest: /etc/dovecot/dovecot.conf
+  notify: restart dovecot
+
+- name: Configure SSL settings
+  template:
+    src: dovecot/10-ssl.conf.j2
+    dest: /etc/dovecot/conf.d/10-ssl.conf
+  notify: restart dovecot
+
+- name: Configure mail location
+  template:
+    src: dovecot/10-mail.conf.j2
+    dest: /etc/dovecot/conf.d/10-mail.conf
+  notify: restart dovecot
+
+- name: Create vmail user
+  user:
+    name: vmail
+    uid: 5000
+    group: vmail
+    shell: /usr/sbin/nologin
+    system: yes

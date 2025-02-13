@@ -1,0 +1,16 @@
+---
+- name: Install Prometheus
+  apt:
+    name: prometheus
+    state: present
+
+- name: Configure Prometheus
+  template:
+    src: prometheus/prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+  notify: restart prometheus
+
+- name: Install Node Exporter
+  apt:
+    name: prometheus-node-exporter
+    state: present

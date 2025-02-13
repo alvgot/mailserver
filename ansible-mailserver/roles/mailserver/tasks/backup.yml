@@ -1,0 +1,19 @@
+---
+- name: Install BorgBackup
+  apt:
+    name: borgbackup
+    state: present
+
+- name: Configure backup script
+  template:
+    src: backup.sh.j2
+    dest: /usr/local/bin/mailserver-backup
+    mode: 0755
+
+- name: Create backup cron job
+  cron:
+    name: "Daily Mailserver Backup"
+    job: "/usr/local/bin/mailserver-backup > /var/log/backup.log 2>&1"
+    user: root
+    hour: 2
+    minute: 30

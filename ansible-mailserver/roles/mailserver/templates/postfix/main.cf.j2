@@ -1,0 +1,21 @@
+# Postfix main configuration
+smtpd_banner = $myhostname ESMTP
+biff = no
+append_dot_mydomain = no
+
+# TLS parameters
+smtpd_tls_cert_file=/etc/ssl/certs/postfix.crt
+smtpd_tls_key_file=/etc/ssl/private/postfix.key
+smtpd_tls_security_level=may
+
+# Authentication
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+
+# Network settings
+myhostname = mail.{{ domain }}
+mydomain = {{ domain }}
+myorigin = $mydomain
+inet_interfaces = all
+mydestination = $myhostname, $mydomain, localhost

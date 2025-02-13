@@ -1,0 +1,9 @@
+# OpenDKIM configuration
+Domain                  {{ domain }}
+KeyFile                 /etc/opendkim/keys/{{ domain }}/mail.private
+Selector                mail
+Socket                  inet:8891@localhost
+UserID                  opendkim:opendkim
+Canonicalization        relaxed/simple
+Mode                    sv
+SubDomains              yes

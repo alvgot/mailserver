@@ -6,4 +6,3 @@
 - hosts: container
   roles:
     - mailserver
-    - dns_config

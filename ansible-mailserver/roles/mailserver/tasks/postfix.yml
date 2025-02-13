@@ -1,0 +1,29 @@
+---
+- name: Configure Postfix main config
+  template:
+    src: postfix/main.cf.j2
+    dest: /etc/postfix/main.cf
+  notify: restart postfix
+
+- name: Configure Postfix master config
+  template:
+    src: postfix/master.cf.j2
+    dest: /etc/postfix/master.cf
+  notify: restart postfix
+
+- name: Create postfix SASL directory
+  file:
+    path: /etc/postfix/sasl
+    state: directory
+    mode: 0750
+
+- name: Configure SASL authentication
+  copy:
+    content: "mech_list: plain login"
+    dest: /etc/postfix/sasl/smtpd.conf
+
+- name: Generate TLS certificates
+  command: |
+    openssl req -x509 -nodes -days 3650 -newkey rsa:2048     -subj "/CN={{ domain }}"     -keyout /etc/ssl/private/postfix.key     -out /etc/ssl/certs/postfix.crt
+  args:
+    creates: /etc/ssl/certs/postfix.crt

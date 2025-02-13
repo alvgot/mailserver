@@ -1,0 +1,16 @@
+---
+- name: Update Suricata rules
+  command: suricata-update
+  when: suricata_rule_update
+
+- name: Configure Suricata
+  template:
+    src: suricata/suricata.yaml.j2
+    dest: /etc/suricata/suricata.yaml
+  notify: restart suricata
+
+- name: Enable Suricata service
+  systemd:
+    name: suricata
+    enabled: yes
+    state: started

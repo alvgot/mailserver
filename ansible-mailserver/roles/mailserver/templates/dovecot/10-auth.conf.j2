@@ -1,0 +1,9 @@
+# Authentication configuration
+disable_plaintext_auth = no
+auth_username_format = %n
+passdb {
+  driver = pam
+}
+userdb {
+  driver = passwd
+}

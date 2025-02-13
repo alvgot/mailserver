@@ -1,0 +1,12 @@
+---
+- name: Configure nftables
+  template:
+    src: nftables/container_nftables.conf.j2
+    dest: /etc/nftables.conf
+  notify: restart nftables
+
+- name: Enable nftables service
+  systemd:
+    name: nftables
+    enabled: yes
+    state: started
