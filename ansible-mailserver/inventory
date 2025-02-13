@@ -1,0 +1,5 @@
+[host]
+mailhost ansible_connection=local
+
+[container]
+mailcontainer ansible_host=10.0.0.2 ansible_user=root

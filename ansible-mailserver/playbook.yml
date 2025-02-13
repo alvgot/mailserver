@@ -1,0 +1,9 @@
+---
+- hosts: host
+  roles:
+    - host_setup
+
+- hosts: container
+  roles:
+    - mailserver
+    - dns_config
