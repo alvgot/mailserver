@@ -2,3 +2,4 @@ ansible>=7.0
 jmespath
 passlib
 python3-psycopg2
+python3-psycopg2

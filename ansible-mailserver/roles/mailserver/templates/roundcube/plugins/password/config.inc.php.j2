@@ -1,6 +1,4 @@
 <?php
-$config['password_driver'] = 'sql';
-$config['password_confirm_current'] = true;
 $config['password_minimum_length'] = 12;
 $config['password_require_nonalpha'] = true;
-$config['password_db_dsn'] = 'pgsql://{{ postfixadmin_db_user }}:{{ postfixadmin_db_password }}@localhost/{{ postfixadmin_db_name }}';
+$config['password_force_new_password'] = true;

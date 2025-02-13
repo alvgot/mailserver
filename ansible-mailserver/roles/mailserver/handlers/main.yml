@@ -1,4 +1,4 @@
-
+---
 - name: restart monitoring services
   systemd:
     name: "{{ item }}"
@@ -7,17 +7,10 @@
     - prometheus
     - grafana
 
-- name: restart prometheus
-  systemd:
-    name: prometheus
-    state: restarted
-
-- name: restart grafana
-  systemd:
-    name: grafana
-    state: restarted
-
 - name: restart redis
   systemd:
     name: redis-server
     state: restarted
+
+- name: initialize aide
+  command: aideinit -y -f

@@ -35,3 +35,8 @@
 - include_tasks: backup.yml
 - include_tasks: monitoring.yml
 - include_tasks: redis.yml
+- include_tasks: aide.yml
+- include_tasks: redis.yml
+- include_tasks: monitoring.yml
+- include_tasks: aide.yml
+- include_tasks: redis.yml

@@ -1,23 +1,11 @@
 ---
-- name: Install AIDE
+- name: Install and configure AIDE
   apt:
     name: aide
     state: present
+  notify: initialize aide
 
-- name: Configure AIDE
+- name: Deploy AIDE config
   template:
     src: aide/aide.conf.j2
     dest: /etc/aide/aide.conf
-
-- name: Initialize AIDE database
-  command: aideinit -y -f
-  args:
-    creates: /var/lib/aide/aide.db
-
-- name: Schedule daily AIDE checks
-  cron:
-    name: "Daily AIDE scan"
-    job: "/usr/bin/aide --check"
-    user: root
-    hour: 5
-    minute: 0

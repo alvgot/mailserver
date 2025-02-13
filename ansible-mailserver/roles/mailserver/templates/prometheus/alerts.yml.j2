@@ -6,6 +6,8 @@ groups:
     for: 5m
     labels:
       severity: warning
+    annotations:
+      summary: "High load on {{ inventory_hostname }}"
   - alert: ServiceDown
     expr: up{job="mailserver"} == 0
     for: 1m

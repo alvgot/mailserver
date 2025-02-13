@@ -9,3 +9,9 @@
         systemctl reload postfix dovecot
     endscript
 }
+
+/var/log/suricata/*.log {
+    weekly
+    rotate 8
+    compress
+}

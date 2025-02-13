@@ -1,5 +1,5 @@
 ---
-- name: Install Redis
+- name: Install and secure Redis
   apt:
     name: redis-server
     state: present
@@ -9,9 +9,3 @@
     src: redis/redis.conf.j2
     dest: /etc/redis/redis.conf
   notify: restart redis
-
-- name: Enable Redis
-  systemd:
-    name: redis-server
-    enabled: yes
-    state: restarted

@@ -11,3 +11,15 @@ log_retention_days: 30
 
 # Monitoring Configuration
 prometheus_scrape_interval: 60s
+redis_password: "{{ 24 | random_password }}"
+backup_passphrase: "{{ 50 | random_password }}"
+
+# Security Enhancements
+redis_password: "{{ 24 | random_password }}"
+backup_passphrase: "{{ 50 | random_password }}"
+
+# Monitoring Configuration
+prometheus_scrape_interval: 60s
+prometheus_targets:
+  - name: mailserver
+    port: 11334
