@@ -4,7 +4,7 @@
     url: "https://api.gandi.net/v5/livedns/domains/{{ domain }}/records/@/A"
     method: PUT
     headers:
-      Authorization: "Apikey {{ gandi_api_key }}"
+      Authorization: "Bearer {{ gandi_api_key }}"
     body:
       rrset_values: ["{{ host_public_ip }}"]
       rrset_ttl: 300
@@ -15,7 +15,7 @@
     url: "https://api.gandi.net/v5/livedns/domains/{{ domain }}/records/@/MX"
     method: PUT
     headers:
-      Authorization: "Apikey {{ gandi_api_key }}"
+      Authorization: "Bearer {{ gandi_api_key }}"
     body:
       rrset_values: ["10 {{ domain }}."]
     body_format: json
@@ -25,7 +25,7 @@
     url: "https://api.gandi.net/v5/livedns/domains/{{ domain }}/records/@/TXT"
     method: PUT
     headers:
-      Authorization: "Apikey {{ gandi_api_key }}"
+      Authorization: "Bearer {{ gandi_api_key }}"
     body:
       rrset_values: ['"v=spf1 mx -all"']
     body_format: json
@@ -35,7 +35,7 @@
     url: "https://api.gandi.net/v5/livedns/domains/{{ domain }}/records/mail._domainkey/TXT"
     method: PUT
     headers:
-      Authorization: "Apikey {{ gandi_api_key }}"
+      Authorization: "Bearer {{ gandi_api_key }}"
     body:
       rrset_values: ['"v=DKIM1; k=rsa; p={{ dkim_public_key }}"']
     body_format: json
@@ -45,7 +45,7 @@
     url: "https://api.gandi.net/v5/livedns/domains/{{ domain }}/records/_dmarc/TXT"
     method: PUT
     headers:
-      Authorization: "Apikey {{ gandi_api_key }}"
+      Authorization: "Bearer {{ gandi_api_key }}"
     body:
       rrset_values: ['"v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; rua=mailto:{{ email }}; ruf=mailto:{{ email }};"']
     body_format: json
